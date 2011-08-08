@@ -84,6 +84,29 @@ namespace PythonScript
 	//registering float3 meta type
 	int id = qRegisterMetaType<float3>("float3");
 
+	void TundraDecorator::setx(float3* self, float value)
+    {
+        self->x = value;
+    }
+    
+    void TundraDecorator::sety(float3* self, float value)
+    {
+        self->y = value;
+    }
+    
+    void TundraDecorator::setz(float3* self, float value)
+    {
+        self->z = value;
+    }
+	void TundraDecorator::invert(float3* self)
+    {
+        float tx = (self->x) * -1.0f;
+		float ty = (self->y) * -1.0f ;
+		float tz = (self->z) * -1.0f ;
+		self->Set(tx, ty, tz);
+        
+    }
+
 	float3 TundraDecorator::position(const Transform* self)
     {
         return self->pos;
