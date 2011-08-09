@@ -51,6 +51,7 @@ moc_*.cxx.rule
 moc_*.cxx_parameters
 qrc_*.cxx
 ui_*.h
+*.qrc.depends
 
 # Generated documentation
 doc/html/
@@ -91,6 +92,7 @@ bin/fullmemoryleaklog.txt
 bin/pymodules/DLLs/
 bin/pymodules/python26_Lib.zip
 bin/qtplugins
+bin/vlcplugins
 bin/data/assets
 build/
 
