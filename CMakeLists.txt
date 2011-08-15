@@ -185,6 +185,7 @@ include (Sagase)
 include (ModuleSetup)
 include (ConfigurePackages)
 include (TundraInstall)
+include (FindDirectX)
 
 # Disable unnecessary build types
 set (CMAKE_CONFIGURATION_TYPES "Release;RelWithDebInfo;Debug" CACHE STRING "Configurations" FORCE)
@@ -201,6 +202,10 @@ endif()
 # On all platforms, we enable PCH files by default.
 add_definitions (-DPCH_ENABLED)
 set (PCH_ENABLED 1)
+
+# This setting affects only windows. Possibility to opt out of linking agains DirecX spesific libs.
+# Enabled more efficient texture blitting to Ogre using DirectX. This makes RenderSystem_Direct3D9 mandatory.
+set (ENABLE_DIRECTX 1)
 
 # Set global hardcoded install prefix. User cannot change this at the moment, untill we figure how we want to use this!
 # Call the cleanup step that cleans the install prefix before every installations. This is important as module setups might change between builds.
