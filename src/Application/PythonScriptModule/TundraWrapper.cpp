@@ -98,13 +98,9 @@ namespace PythonScript
     {
         self->z = value;
     }
-	void TundraDecorator::invert(float3* self)
-    {
-        float tx = (self->x) * -1.0f;
-		float ty = (self->y) * -1.0f ;
-		float tz = (self->z) * -1.0f ;
-		self->Set(tx, ty, tz);
-        
+	float3 TundraDecorator::neg(float3* self)
+    {   
+		return self->Neg();      
     }
 
 	float3 TundraDecorator::position(const Transform* self)

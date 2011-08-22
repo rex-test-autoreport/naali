@@ -56,14 +56,14 @@ namespace PythonScript
 		float x(float3* self);
         float y(float3* self);
         float z(float3* self);
-        
+
 		//setters for float3 x, y and z coordinates
 		void setx(float3* self, float value);
         void sety(float3* self, float value);
         void setz(float3* self, float value);
 
-		//procedure to invert the float3 object
-		void invert(float3* self);
+		//procedure to negate the float3 object
+		float3 neg(float3* self);
 
 		//getters for Transform pos,rot and scale float3 objects
 		float3 position(const Transform* self);
