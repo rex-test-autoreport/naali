@@ -27,7 +27,7 @@ scene = None
 def newclient(connectionid):
     if scene is not None:
         id = scene.NextFreeId()
-        tundra.Server().UserConnected(connectionid, 0)
+        tundra.Server().UserConnected(connectionid, None, None)
 
         # Return the id of the connection
         return id
@@ -77,7 +77,7 @@ def onAttributeChanged(component, attribute, changeType):
     if component_name != "EC_Placeable":
         return
 
-    entity = component.GetParentEntity()
+    entity = component.ParentEntity()
     
     # Don't sync local stuff
     if entity.IsLocal():
@@ -85,16 +85,22 @@ def onAttributeChanged(component, attribute, changeType):
 
     ent_id = entity.id
 
-    data = component.GetAttributeQVariant('Transform')
-    transform = list()
+    data = component.transform
+    if data is not None:
+        #print data.position().x()
+        transform = list()
 
-    transform.extend([data.position().x(), data.position().y(), data.position().z()])
-    transform.extend([data.rotation().x(), data.rotation().y(), data.rotation().z()])
-    transform.extend([data.scale().x(), data.scale().y(), data.scale().z()])
+        transform.extend([data.position().x(), data.position().y(), data.position().z()])
+        transform.extend([data.rotation().x(), data.rotation().y(), data.rotation().z()])
+        transform.extend([data.scale().x(), data.scale().y(), data.scale().z()])
 
-    sendAll(['setAttr', {'id': ent_id, 
-                         'component': component_name,
-                         'Transform': transform}])
+        sendAll(['setAttr', {'id': ent_id, 
+                             'component': component_name,
+                             'Transform': transform}])
+
+    else:
+        #print "_",
+        pass #somehow at init there are placeables without transform, huh?
 
 def onNewEntity(entity, changeType):
     sendAll(['addEntity', {'id': entity.id}])
@@ -116,7 +122,7 @@ def onComponentAdded(entity, component, changeType):
         data = component.GetAttributeQVariant('Transform')
         transform = list()
 
-        transform.extend([data.position().x(), data.position().y(), data.position().z()])
+        transform.extend([data.pos.x(), data.position().y(), data.position().z()])
         transform.extend([data.rotation().x(), data.rotation().y(), data.rotation().z()])
         transform.extend([data.scale().x(), data.scale().y(), data.scale().z()])
 
@@ -172,7 +178,7 @@ def handle_clients(ws):
             
             #FIXME don't sync locals
             if scene is not None:
-                xml = scene.GetSceneXML(True)
+                xml = scene.GetSceneXML(True, False)
                 ws.send(json.dumps(['loadScene', {'xml': str(xml)}]))
             else:
                 tundra.LogWarning("Websocket Server: handling a client, but doesn't have scene :o")
