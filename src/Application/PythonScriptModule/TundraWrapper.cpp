@@ -66,7 +66,8 @@ namespace PythonScript
     {
         obj->type = assetType;
     }
-	float TundraDecorator::x(float3* self)
+  
+    float TundraDecorator::x(float3* self)
     {
         return self->x;
     }
@@ -101,7 +102,7 @@ namespace PythonScript
 
     float3 TundraDecorator::neg(float3* self)
     {   
-		return self->Neg();      
+        return self->Neg();      
     }
 
     float3 TundraDecorator::position(const Transform* self)
@@ -149,7 +150,7 @@ namespace PythonScript
 
     Quat TundraDecorator::FromEulerZYX(Quat* self, float z, float y, float x) const
     {
-       return self->FromEulerZYX(z, y ,x);
+        return self->FromEulerZYX(z, y ,x);
     }
     
     void TundraDecorator::SetFromAxisAngle(Quat* self, const float3 &rotationAxis, const float rotationAngleRadians)
