@@ -187,6 +187,7 @@ include (Sagase)
 include (ModuleSetup)
 include (ConfigurePackages)
 include (TundraInstall)
+include (FindOgre)
 include (FindDirectX)
 
 # Disable unnecessary build types
